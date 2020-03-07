@@ -15,6 +15,11 @@ const routes = [
     name: 'Search',
     component: () => import('../views/Search.vue')
   },
+  {
+    path: '/progress',
+    name: 'Progress',
+    component: () => import('../views/Progress.vue')
+  },
 ]
 
 const router = new VueRouter({
