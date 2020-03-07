@@ -23,11 +23,31 @@
       hide-no-data
       hint="Search by courses code, name, descriptions and professors "
     ></v-autocomplete>
+
     <router-link to="/search" style="text-decoration: none;">
       <v-btn outlined rounded large class="ma-2">Browse</v-btn>
     </router-link>
 
     <v-spacer />
+
+    <v-btn icon>
+      <v-icon>mdi-calendar</v-icon>
+    </v-btn>
+
+    <v-divider vertical inset />
+
+    <v-btn large  icon class="mr-n2">
+      <v-icon color="blue-grey darken-4">mdi-home</v-icon>
+    </v-btn>
+    <v-btn large  icon>
+      <v-icon color="blue-grey darken-4">mdi-progress-check</v-icon>
+    </v-btn>
+
+    <v-divider vertical inset />
+
+    <v-btn large icon>
+      <v-icon color="blue-grey darken-4">mdi-account-settings</v-icon>
+    </v-btn>
   </v-app-bar>
 </template>
 
