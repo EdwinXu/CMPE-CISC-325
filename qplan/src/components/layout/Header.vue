@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="indigo lighten-1">
+  <v-app-bar app clipped-left color="indigo lighten-1">
       QPlan
   </v-app-bar>
 </template>

@@ -1,6 +1,7 @@
 <template>
   <v-app id="qplan">
     <Header />
+    <ProgressSidebar />
     <v-content>
       <router-view/>
     </v-content>
@@ -9,12 +10,15 @@
 
 <script>
 import Header from "./components/layout/Header";
+import ProgressSidebar from "./components/layout/ProgressSidebar";
+
 
 export default {
   name: 'App',
 
   components: {
-    Header
+    Header,
+    ProgressSidebar
   },
 
   data: () => ({
