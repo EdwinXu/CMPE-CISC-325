@@ -4,10 +4,28 @@
     <span class="title mr-5">
       <v-btn x-large text rounded>
         <h2>
-          <router-link to="/" class="black--text" style="text-decoration: none;"> QPlan</router-link>
+          <router-link to="/" class="black--text" style="text-decoration: none;">QPlan</router-link>
         </h2>
       </v-btn>
     </span>
+
+    <v-spacer />
+
+    <v-autocomplete
+      label="Search courses"
+      ref="searchBar"
+      rounded
+      flat
+      hide-details
+      append-icon="search"
+      clearable
+      solo-inverted
+      hide-no-data
+      hint="Search by courses code, name, descriptions and professors "
+    ></v-autocomplete>
+
+    <v-spacer />
+    
   </v-app-bar>
 </template>
 
