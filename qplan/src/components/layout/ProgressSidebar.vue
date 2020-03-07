@@ -6,10 +6,18 @@
 export default {
   name: "ProgressSidebar",
   data() {
-    return {
-      progressSideBar: null,
-    };
+    return {};
   },
+  computed: {
+    progressSidebar: {
+      get() {
+        return this.$store.getters.showProgressSidebar;
+      },
+      set(value) {
+        return this.$store.commit("updateProgressSidebar", value);
+      }
+    }
+  }
 };
 </script>
 

@@ -5,11 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    showProgressSidebar: true,
   },
   mutations: {
+    updateProgressSidebar(state, value) {
+      state.showProgressSidebar = value
+    },
   },
   actions: {
   },
-  modules: {
-  }
+  getters: {
+    showProgressSidebar: state => state.showProgressSidebar,
+  },
 })
