@@ -1,5 +1,10 @@
 <template>
-  <v-navigation-drawer app width="300" clipped v-model="progressSidebar">Put progress stuff here</v-navigation-drawer>
+  <v-navigation-drawer app width="300" clipped v-model="progressSidebar">
+    <div class="headline mb-2">
+      Credit Progress
+      <v-icon color="black" class="mb-1">mdi-progress-check</v-icon>
+    </div>
+  </v-navigation-drawer>
 </template>
 
 <script>
