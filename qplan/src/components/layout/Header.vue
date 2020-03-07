@@ -23,9 +23,11 @@
       hide-no-data
       hint="Search by courses code, name, descriptions and professors "
     ></v-autocomplete>
+    <router-link to="/search" style="text-decoration: none;">
+      <v-btn outlined rounded large class="ma-2">Browse</v-btn>
+    </router-link>
 
     <v-spacer />
-    
   </v-app-bar>
 </template>
 
