@@ -27,3 +27,11 @@ export default {
   }),
 };
 </script>
+
+<style>
+/* Remove the underline and blue color from links */
+.v-application a {
+  text-decoration: none;
+  color: black !important;
+}
+</style>

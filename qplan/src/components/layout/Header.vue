@@ -4,7 +4,7 @@
     <span class="title mr-5">
       <v-btn x-large text rounded>
         <h2>
-          <router-link to="/" class="black--text" style="text-decoration: none;">QPlan</router-link>
+          <router-link to="/">QPlan</router-link>
         </h2>
       </v-btn>
     </span>
@@ -24,7 +24,7 @@
       hint="Search by courses code, name, descriptions and professors "
     ></v-autocomplete>
 
-    <router-link to="/search" style="text-decoration: none;">
+    <router-link to="/search">
       <v-btn outlined rounded large class="ma-2">Browse</v-btn>
     </router-link>
 
