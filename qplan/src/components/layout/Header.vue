@@ -14,6 +14,7 @@
     <v-autocomplete
       label="Search courses"
       ref="searchBar"
+      :items="allSearchOptions"
       rounded
       flat
       hide-details
@@ -21,7 +22,10 @@
       clearable
       solo-inverted
       hide-no-data
-      hint="Search by courses code, name, descriptions and professors "
+      hint="Search by courses code or name"
+      @input="searchCourses($event)"
+      @keyup.enter="searchCourses($event.target.value)"
+      @click:append="searchCourses($event.target.value)"
     ></v-autocomplete>
 
     <router-link to="/search">
@@ -57,6 +61,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "Header",
   methods: {
@@ -65,7 +71,19 @@ export default {
         "updateProgressSidebar",
         !this.$store.getters.showProgressSidebar
       );
+    },
+    searchCourses: function(searchQuery) {
+      if (searchQuery !== undefined) {
+        this.$refs.searchBar.blur();
+        this.$router.push({
+          path: "/search",
+          query: { query: searchQuery }
+        });
+      }
     }
+  },
+  computed: {
+    ...mapGetters(["allSearchOptions"])
   }
 };
 </script>
