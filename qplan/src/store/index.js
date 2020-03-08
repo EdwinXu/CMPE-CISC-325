@@ -1170,5 +1170,8 @@ export default new Vuex.Store({
   },
   getters: {
     showProgressSidebar: state => state.showProgressSidebar,
+    allPrefixes: state => {
+      return state.courses.map(course => course.prefix)
+    },
   },
 })
