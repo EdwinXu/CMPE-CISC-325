@@ -16,8 +16,20 @@
       <b>Accreditation Units (AUs)</b>
     </v-row>
 
-    <ProgressBar />
-
+    <div
+      v-for="requirement in graduationRequirements['auBaseRequirements']"
+      v-bind:key="requirement.name"
+    >
+      <div class="subtitle-1">{{ requirement.name }}</div>
+      <ProgressBar />
+    </div>
+    <div
+      v-for="requirement in graduationRequirements['auCombinedRequirements']"
+      v-bind:key="requirement.name"
+    >
+      <div class="subtitle-1">{{ requirement.name }}</div>
+      <ProgressBar />
+    </div>
     <v-divider class="mb-2 mt-3"></v-divider>
 
     <v-row class="mx-0">
@@ -39,6 +51,7 @@
 
 <script>
 import ProgressBar from "../ProgressBar.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "ProgressSidebar",
@@ -47,6 +60,7 @@ export default {
     return {};
   },
   computed: {
+    ...mapState(["graduationRequirements"]),
     progressSidebar: {
       get() {
         return this.$store.getters.showProgressSidebar;
