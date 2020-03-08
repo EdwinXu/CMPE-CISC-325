@@ -36,7 +36,13 @@
       <b>Additional Requirements</b>
     </v-row>
 
-    <ProgressBar />
+    <div
+      v-for="requirement in graduationRequirements['additionalRequirements']"
+      v-bind:key="requirement.name"
+    >
+      <div class="subtitle-1">{{ requirement.name }}</div>
+      <ProgressBar />
+    </div>
 
     <div class="pt-3 mb-4 mx-1">
       <v-btn rounded block color="indigo lighten-1">
