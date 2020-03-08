@@ -29,13 +29,40 @@
         ></v-overflow-btn>
       </v-col>
     </v-row>
-
+    <v-chip-group show-arrows class="mb-n1 pl-2">
+      <v-chip
+        v-if="selectedSemester != undefined"
+        close
+        @click:close="selectedSemester = undefined"
+      >Semester: {{ selectedSemester }}</v-chip>
+      <v-chip
+        v-if="selectedCourseCode != undefined"
+        close
+        @click:close="selectedCourseCode = undefined"
+      >Prefix: {{ selectedCourseCode }}</v-chip>
+      <v-chip
+        v-if="selected00Level != undefined"
+        close
+        @click:close="selected00Level = undefined"
+      >00's Level: {{ selected00Level }}</v-chip>
+      <v-chip
+        v-if="selectedDiscpline != undefined"
+        close
+        @click:close="selectedDiscpline = undefined"
+      >Discipline: {{ selectedDiscpline }}</v-chip>
+      <v-chip
+        v-for="(filter, index) in chipFilters"
+        :key="filter"
+        close
+        @click:close="removeAdditionalFilter(index)"
+      >{{ filter }}</v-chip>
+    </v-chip-group>
     SHOW COURSES HERE
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   name: "Search",
@@ -58,7 +85,8 @@ export default {
       hideComplete: true,
       selectedSemester: undefined,
       selectedCourseCode: undefined,
-      selected00Level: undefined
+      selected00Level: undefined,
+      selectedDiscpline: undefined
     };
   },
   computed: {
