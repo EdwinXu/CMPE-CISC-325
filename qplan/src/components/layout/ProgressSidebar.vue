@@ -1,9 +1,31 @@
 <template>
-  <v-navigation-drawer app width="300" clipped v-model="progressSidebar">
+  <v-navigation-drawer app width="300" clipped v-model="progressSidebar" class="ma-1 pr-1">
     <div class="headline mb-2">
       Credit Progress
       <v-icon color="black" class="mb-1">mdi-progress-check</v-icon>
     </div>
+
+    <div style="text-align: center;">
+      <b>Legend</b>
+    </div>
+    <v-row class="mt-n3">
+      <v-col>
+        <v-card rounded>
+          <v-progress-linear height="25" value="100" striped color="indigo lighten-3">
+            <span>Completed</span>
+          </v-progress-linear>
+        </v-card>
+      </v-col>
+      <v-col>
+        <v-card rounded>
+          <v-progress-linear buffer-value="100" height="25" striped color="indigo lighten-3">
+            <span>Planned</span>
+          </v-progress-linear>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <v-divider class="mb-2"></v-divider>
 
     <div class="subtitle-1">
       <b>Total Credits</b>
