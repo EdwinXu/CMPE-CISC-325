@@ -4,7 +4,7 @@
       Credit Progress
       <v-icon color="black" class="mb-1">mdi-progress-check</v-icon>
     </div>
-    PUT PROGRESS BARS HERE
+    <ProgressBar />
     <div class="mx-1">
       <v-btn rounded block color="indigo lighten-1">
         <router-link to="/progress">
@@ -17,8 +17,11 @@
 </template>
 
 <script>
+import ProgressBar from "../ProgressBar.vue";
+
 export default {
   name: "ProgressSidebar",
+  components: { ProgressBar },
   data() {
     return {};
   },
