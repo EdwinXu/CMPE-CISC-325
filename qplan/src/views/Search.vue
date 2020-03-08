@@ -125,7 +125,16 @@ export default {
       selected00Level: undefined,
       selectedDiscpline: undefined,
       sortDecending: true,
-      selectedSortButton: 0
+      buttonSortMapping: [
+        "prefix",
+        "name",
+        "credits",
+        "mathematics",
+        "naturalSciences",
+        "complementaryStudies",
+        "engineeringSciences",
+        "engineeringDesign"
+      ]
     };
   },
   computed: {
@@ -170,6 +179,14 @@ export default {
           this.selected00Level === undefined,
         status: status => !(status == "completed" && this.hideComplete)
       };
+    },
+    selectedSortButton: {
+      get() {
+        return this.buttonSortMapping.indexOf(this.sortBy);
+      },
+      set(value) {
+        this.sortBy = this.buttonSortMapping[value];
+      }
     }
   },
   methods: {
