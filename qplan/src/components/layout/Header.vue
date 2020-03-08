@@ -36,11 +36,16 @@
 
     <v-divider vertical inset />
 
-    <v-btn large  icon class="mr-n2">
-      <v-icon color="blue-grey darken-4">mdi-home</v-icon>
+    <v-btn large icon class="mr-n2" v-on="on">
+      <router-link to="/">
+        <v-icon color="blue-grey darken-4">mdi-home</v-icon>
+      </router-link>
     </v-btn>
-    <v-btn large  icon>
-      <v-icon color="blue-grey darken-4">mdi-progress-check</v-icon>
+
+    <v-btn icon large v-on="on">
+      <router-link to="/progress">
+        <v-icon color="blue-grey darken-4">mdi-progress-check</v-icon>
+      </router-link>
     </v-btn>
 
     <v-divider vertical inset />
