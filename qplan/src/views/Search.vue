@@ -1,6 +1,6 @@
 <template>
   <div class="elevation-4 mx-2">
-    <v-row dense>
+    <v-row dense class="mb-n6 mt-n2">
       <v-col>
         <v-overflow-btn
           v-model="selectedSemester"
@@ -58,7 +58,29 @@
       >{{ filter }}</v-chip>
       <v-spacer />
       <v-switch v-model="hideComplete" label="Hide Completed" class="mt-1 mb-n4 mr-2"></v-switch>
-    </v-chip-group>SHOW COURSES HERE
+    </v-chip-group>
+
+    <v-toolbar dense color="grey lighten-5">
+      <v-spacer />
+      <span class="body-2 font-italic font-weight-bold">SORT</span>:
+      <v-btn-toggle v-model="selectedSortButton" mandatory dense group tile color="primary">
+        <v-btn>Prefix</v-btn>
+        <v-btn>Name</v-btn>
+        <v-btn>Credits</v-btn>
+        <v-btn>Math</v-btn>
+        <v-btn>NS</v-btn>
+        <v-btn>CS</v-btn>
+        <v-btn>ES</v-btn>
+        <v-btn>ED</v-btn>
+      </v-btn-toggle>
+      <v-divider vertical inset></v-divider>
+      <div class="pl-1">
+        <v-btn text max-width="39" min-width="39">
+          <v-icon @click="sortDecending = false" v-if="sortDecending">mdi-sort-descending</v-icon>
+          <v-icon @click="sortDecending = true" v-else>mdi-sort-ascending</v-icon>
+        </v-btn>
+      </div>
+    </v-toolbar>SHOW COURSES HERE
   </div>
 </template>
 
@@ -87,7 +109,9 @@ export default {
       selectedSemester: undefined,
       selectedCourseCode: undefined,
       selected00Level: undefined,
-      selectedDiscpline: undefined
+      selectedDiscpline: undefined,
+      sortDecending: true,
+      selectedSortButton: 0,
     };
   },
   computed: {
