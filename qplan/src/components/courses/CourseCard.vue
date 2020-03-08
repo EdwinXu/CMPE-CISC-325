@@ -1,5 +1,5 @@
 <template>
-<v-dialog v-model="dialog" width="700">
+<v-dialog width="700">
     <template v-slot:activator="{ on } ">
         <v-btn v-on="on" width="100%" rounded>
             {{ course.courseCode }} - {{ course.name }}
