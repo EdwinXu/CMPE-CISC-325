@@ -14,35 +14,54 @@
 
     <v-row class="mx-0">
       <b>Accreditation Units (AUs)</b>
+      <v-spacer />
+      <v-btn icon small @click="showAccreditationUnits = !showAccreditationUnits">
+        <v-icon v-if="showAccreditationUnits">mdi-chevron-up</v-icon>
+        <v-icon v-else>mdi-chevron-down</v-icon>
+      </v-btn>
     </v-row>
 
-    <div
-      v-for="requirement in graduationRequirements['auBaseRequirements']"
-      v-bind:key="requirement.name"
-    >
-      <div class="subtitle-1">{{ requirement.name }}</div>
-      <ProgressBar />
-    </div>
-    <div
-      v-for="requirement in graduationRequirements['auCombinedRequirements']"
-      v-bind:key="requirement.name"
-    >
-      <div class="subtitle-1">{{ requirement.name }}</div>
-      <ProgressBar />
-    </div>
+    <v-expand-transition>
+      <div v-show="showAccreditationUnits">
+        <div
+          v-for="requirement in graduationRequirements['auBaseRequirements']"
+          v-bind:key="requirement.name"
+        >
+          <div class="subtitle-1">{{ requirement.name }}</div>
+          <ProgressBar />
+        </div>
+        <div
+          v-for="requirement in graduationRequirements['auCombinedRequirements']"
+          v-bind:key="requirement.name"
+        >
+          <div class="subtitle-1">{{ requirement.name }}</div>
+          <ProgressBar />
+        </div>
+      </div>
+    </v-expand-transition>
+
     <v-divider class="mb-2 mt-3"></v-divider>
 
     <v-row class="mx-0">
       <b>Additional Requirements</b>
+      <v-spacer />
+      <v-btn icon small @click="showAdditionalRequirements = !showAdditionalRequirements">
+        <v-icon v-if="showAdditionalRequirements">mdi-chevron-up</v-icon>
+        <v-icon v-else>mdi-chevron-down</v-icon>
+      </v-btn>
     </v-row>
 
-    <div
-      v-for="requirement in graduationRequirements['additionalRequirements']"
-      v-bind:key="requirement.name"
-    >
-      <div class="subtitle-1">{{ requirement.name }}</div>
-      <ProgressBar />
-    </div>
+    <v-expand-transition>
+      <div v-show="showAdditionalRequirements">
+        <div
+          v-for="requirement in graduationRequirements['additionalRequirements']"
+          v-bind:key="requirement.name"
+        >
+          <div class="subtitle-1">{{ requirement.name }}</div>
+          <ProgressBar />
+        </div>
+      </div>
+    </v-expand-transition>
 
     <div class="pt-3 mb-4 mx-1">
       <v-btn rounded block color="indigo lighten-1">
@@ -63,7 +82,10 @@ export default {
   name: "ProgressSidebar",
   components: { ProgressBar },
   data() {
-    return {};
+    return {
+      showAccreditationUnits: true,
+      showAdditionalRequirements: true
+    };
   },
   computed: {
     ...mapState(["graduationRequirements"]),
