@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     showProgressSidebar: true,
+    recentlyViewedCourses: [],
     graduationRequirements: {  //Graduation requirements for the current discipline
       totalCredits: 162.5,
       auBaseRequirements: [
@@ -1164,6 +1165,13 @@ export default new Vuex.Store({
   mutations: {
     updateProgressSidebar(state, value) {
       state.showProgressSidebar = value
+    },
+    addRecentlyViewed(state, toAdd) {
+      var existingIndex = state.recentlyViewedCourses.indexOf(toAdd)
+      if (existingIndex != -1) {
+        state.recentlyViewedCourses.splice(existingIndex, 1)
+      }
+      state.recentlyViewedCourses.unshift(toAdd)
     },
   },
   actions: {
