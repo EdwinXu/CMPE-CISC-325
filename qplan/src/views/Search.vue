@@ -112,6 +112,18 @@ export default {
         "Mechanical",
         "Mining"
       ],
+      disciplinePrefixMapping: {
+        Chemical: ["APSC", "CHEE", "MICR"],
+        Civil: ["APSC", "CIVL"],
+        Computer: ["APSC", "ELEC", "CMPE", "SOFT"],
+        Electrical: ["APSC", "ELEC", "CMPE"],
+        "Eng. Chem": ["APSC", "CHEE", "MICR", "ENCH"],
+        "Eng. Phys": ["APSC", "ENPH"],
+        Geological: ["APSC", "GEOE", "GPHY"],
+        Mathematics: ["APSC", "MTHE"],
+        Mechanical: ["APSC", "MECH"],
+        Mining: ["APSC", "MINE", "MNTC"]
+      },
       hideComplete: true,
       selectedSemester: undefined,
       selectedCourseCode: undefined,
