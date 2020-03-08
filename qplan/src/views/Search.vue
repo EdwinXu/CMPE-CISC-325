@@ -56,8 +56,9 @@
         close
         @click:close="removeAdditionalFilter(index)"
       >{{ filter }}</v-chip>
-    </v-chip-group>
-    SHOW COURSES HERE
+      <v-spacer />
+      <v-switch v-model="hideComplete" label="Hide Completed" class="mt-1 mb-n4 mr-2"></v-switch>
+    </v-chip-group>SHOW COURSES HERE
   </div>
 </template>
 
