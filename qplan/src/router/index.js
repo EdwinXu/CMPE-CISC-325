@@ -13,7 +13,10 @@ const routes = [
   {
     path: '/search',
     name: 'Search',
-    component: () => import('../views/Search.vue')
+    component: () => import('../views/Search.vue'),
+    props(route) {
+      return route.query || {}
+    },
   },
   {
     path: '/progress',

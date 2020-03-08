@@ -31,6 +31,11 @@
     </v-row>
     <v-chip-group show-arrows class="mb-n1 pl-2">
       <v-chip
+        v-if="query != undefined && query != ''"
+        close
+        @click:close="query = undefined"
+      >Search: {{ query }}</v-chip>
+      <v-chip
         v-if="selectedSemester != undefined"
         close
         @click:close="selectedSemester = undefined"
@@ -115,6 +120,9 @@ export default {
       sortDecending: true,
       selectedSortButton: 0
     };
+  },
+  props: {
+    query: String
   },
   computed: {
     ...mapState(["courses"]),

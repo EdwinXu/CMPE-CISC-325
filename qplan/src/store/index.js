@@ -1184,5 +1184,8 @@ export default new Vuex.Store({
     coursesCompleted: state => {
       return state.courses.filter(course => course.status === 'completed')
     },
+    allSearchOptions: state => {
+      return state.courses.map(course => course.courseCode + " " + course.name)
+    },
   },
 })
