@@ -50,12 +50,6 @@
         close
         @click:close="selectedDiscpline = undefined"
       >Discipline: {{ selectedDiscpline }}</v-chip>
-      <v-chip
-        v-for="(filter, index) in chipFilters"
-        :key="filter"
-        close
-        @click:close="removeAdditionalFilter(index)"
-      >{{ filter }}</v-chip>
       <v-spacer />
       <v-switch v-model="hideComplete" label="Hide Completed" class="mt-1 mb-n4 mr-2"></v-switch>
     </v-chip-group>
@@ -80,15 +74,23 @@
           <v-icon @click="sortDecending = true" v-else>mdi-sort-ascending</v-icon>
         </v-btn>
       </div>
-    </v-toolbar>SHOW COURSES HERE
+    </v-toolbar>
+
+    <div v-for="course in filteredCourses" :key="course.id" class="my-2 mx-2">
+      <CourseCard :course="course" detailed />
+    </div>
   </div>
 </template>
 
 <script>
+import CourseCard from "../components/courses/CourseCard";
 import { mapState } from "vuex";
 
 export default {
   name: "Search",
+  components: {
+    CourseCard
+  },
   data() {
     return {
       semesterOptions: ["Fall/Winter", "Fall", "Winter", "Summer"],
@@ -111,13 +113,85 @@ export default {
       selected00Level: undefined,
       selectedDiscpline: undefined,
       sortDecending: true,
-      selectedSortButton: 0,
+      selectedSortButton: 0
     };
   },
   computed: {
     ...mapState(["courses"]),
     allPrefixes() {
       return this.$store.getters.allPrefixes;
+    },
+    filteredCourses() {
+      var filters = this.filters;
+      var array = this.courses;
+      const filterKeys = Object.keys(filters);
+      var filteredArray = array.filter(item => {
+        // validates all filter criteria
+        return filterKeys.every(key => {
+          // ignores non-function predicates
+          if (typeof filters[key] !== "function") return true;
+          return filters[key](item[key]);
+        });
+      });
+      return filteredArray.sort(
+        this.compareValues(this.sortBy, this.sortDecending)
+      );
+    },
+    filters() {
+      return {
+        semester: semester =>
+          semester === this.selectedSemester ||
+          this.selectedSemester === undefined,
+        prefix: prefix =>
+          (prefix === this.selectedCourseCode ||
+            this.selectedCourseCode === undefined) &&
+          (this.selectedDiscpline === undefined ||
+            this.disciplinePrefixMapping[this.selectedDiscpline].includes(
+              prefix
+            )),
+        id: id =>
+          this.query === "" ||
+          this.query === undefined ||
+          id.toLowerCase().includes(this.query.toLowerCase()),
+        code: code =>
+          String(code).charAt(0) === String(this.selected00Level).charAt(0) ||
+          this.selected00Level === undefined,
+        status: status => !(status == "completed" && this.hideComplete)
+      };
+    }
+  },
+  methods: {
+    compareValues(key, sortDescending) {
+      return function innerSort(a, b) {
+        const auKeys = [
+          "mathematics",
+          "naturalSciences",
+          "complementaryStudies",
+          "engineeringSciences",
+          "engineeringDesign"
+        ];
+        var varA, varB;
+        if (auKeys.includes(key)) {
+          varA =
+            typeof a["accreditationUnits"][key] === "string"
+              ? a["accreditationUnits"][key].toUpperCase()
+              : a["accreditationUnits"][key];
+          varB =
+            typeof b["accreditationUnits"][key] === "string"
+              ? b["accreditationUnits"][key].toUpperCase()
+              : b["accreditationUnits"][key];
+        } else {
+          varA = typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
+          varB = typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
+        }
+        let comparison = 0;
+        if (varA > varB) {
+          comparison = 1;
+        } else if (varA < varB) {
+          comparison = -1;
+        }
+        return sortDescending ? comparison * -1 : comparison;
+      };
     }
   }
 };
