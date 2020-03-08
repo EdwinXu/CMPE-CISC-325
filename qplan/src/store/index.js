@@ -7,6 +7,14 @@ export default new Vuex.Store({
   state: {
     showProgressSidebar: true,
     recentlyViewedCourses: [],
+    labelNames: { // All the valid labels for the current discipline
+      listB: "List B",
+      listC: "List C",
+      level400: "400 Level",
+      commonCore: "Common Core",
+      eceCore: "ECE Core",
+      isCustom: "Custom Course",
+    },
     graduationRequirements: {  //Graduation requirements for the current discipline
       totalCredits: 162.5,
       auBaseRequirements: [
@@ -1181,11 +1189,80 @@ export default new Vuex.Store({
     allPrefixes: state => {
       return state.courses.map(course => course.prefix)
     },
+    allSearchOptions: state => {
+      return state.courses.map(course => course.courseCode + " " + course.name)
+    },
     coursesCompleted: state => {
       return state.courses.filter(course => course.status === 'completed')
     },
-    allSearchOptions: state => {
-      return state.courses.map(course => course.courseCode + " " + course.name)
+    coursesInProgress: state => {
+      return state.courses.filter(course => course.status === 'inProgress')
+    },
+    coursesSaved: state => {
+      return state.courses.filter(course => course.status === 'saved')
+    },
+    sumCompletedProperties: (state, getters) => (type, properties) => {
+      const courses = getters.coursesCompleted
+      var total = 0;
+      var i, property;
+      if (courses.length >= 1) {
+        for (i in properties) {
+          property = properties[i];
+          if (type === undefined) {
+            total += courses
+              .map(course => Number(course[property]) || 0)
+              .reduce((total, credits) => total + credits);
+          } else {
+            total += courses
+              .map(course => Number(course[type][property]) || 0)
+              .reduce((total, credits) => total + credits);
+          }
+        }
+        return total;
+      }
+      return 0
+    },
+    sumInProgressProperties: (state, getters) => (type, properties) => {
+      const courses = getters.coursesInProgress
+      var total = 0;
+      var i, property;
+      if (courses.length >= 1) {
+        for (i in properties) {
+          property = properties[i];
+          if (type === undefined) {
+            total += courses
+              .map(course => Number(course[property]) || 0)
+              .reduce((total, credits) => total + credits);
+          } else {
+            total += courses
+              .map(course => Number(course[type][property]) || 0)
+              .reduce((total, credits) => total + credits);
+          }
+        }
+        return total;
+      }
+      return 0
+    },
+    sumSavedProperties: (state, getters) => (type, properties) => {
+      const courses = getters.coursesSaved
+      var total = 0;
+      var i, property;
+      if (courses.length >= 1) {
+        for (i in properties) {
+          property = properties[i];
+          if (type === undefined) {
+            total += courses
+              .map(course => Number(course[property]) || 0)
+              .reduce((total, credits) => total + credits);
+          } else {
+            total += courses
+              .map(course => Number(course[type][property]) || 0)
+              .reduce((total, credits) => total + credits);
+          }
+        }
+        return total;
+      }
+      return 0
     },
   },
 })
