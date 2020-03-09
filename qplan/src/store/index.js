@@ -1176,5 +1176,14 @@ export default new Vuex.Store({
     coursesCompleted: state => {
       return state.courses.filter(course => course.status === 'completed')
     },
+    coursesInProgress: state => {
+      return state.courses.filter(course => course.status === 'inProgress')
+    },
+    coursesSaved: state => {
+      return state.courses.filter(course => course.status === 'saved')
+    },
+    coursesSemesterStatus: (state) => (sem, stat) => {
+      return state.courses.filter(course => course.status === stat && course.semester === sem)
+    },
   },
 })
