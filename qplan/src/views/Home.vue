@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-expansion-panels multiple v-model="panel">
+    <v-expansion-panels multiple>
       <v-expansion-panel>
         <v-expansion-panel-header class="headline">Completed Courses</v-expansion-panel-header>
         <CourseList :courses="coursesCompleted" />
