@@ -1,35 +1,43 @@
 <template>
   <div class="elevation-4 mx-2">
-    <v-row dense class="mb-n6 mt-n2">
-      <v-col>
-        <v-overflow-btn
-          v-model="selectedSemester"
-          :items="semesterOptions"
-          clearable
-          label="Semester"
-        ></v-overflow-btn>
-      </v-col>
-      <v-col>
-        <v-overflow-btn
-          v-model="selectedCourseCode"
-          :items="allPrefixes"
-          clearable
-          label="Course Prefix"
-        ></v-overflow-btn>
-      </v-col>
-      <v-col>
-        <v-overflow-btn v-model="selected00Level" :items="all00Levels" clearable label="00's Level"></v-overflow-btn>
-      </v-col>
-      <v-col>
-        <v-overflow-btn
-          v-model="selectedDiscpline"
-          :items="validDisciplines"
-          clearable
-          label="Discipline"
-        ></v-overflow-btn>
-      </v-col>
-    </v-row>
-    <v-chip-group show-arrows class="mb-n1 pl-2">
+    <v-slide-group show-arrows class="mt-n2">
+      <v-row dense class="mb-n6 mt-n2">
+        <v-col>
+          <v-overflow-btn
+            v-model="selectedSemester"
+            :items="semesterOptions"
+            clearable
+            label="Semester"
+          ></v-overflow-btn>
+        </v-col>
+        <v-col>
+          <v-overflow-btn
+            v-model="selectedCourseCode"
+            :items="allPrefixes"
+            clearable
+            label="Course Prefix"
+          ></v-overflow-btn>
+        </v-col>
+        <v-col>
+          <v-overflow-btn
+            v-model="selected00Level"
+            :items="all00Levels"
+            clearable
+            label="00's Level"
+          ></v-overflow-btn>
+        </v-col>
+        <v-col>
+          <v-overflow-btn
+            v-model="selectedDiscpline"
+            :items="validDisciplines"
+            clearable
+            label="Discipline"
+          ></v-overflow-btn>
+        </v-col>
+      </v-row>
+    </v-slide-group>
+
+    <v-chip-group show-arrows class="pl-2">
       <v-chip
         v-if="query != undefined && query != ''"
         close
