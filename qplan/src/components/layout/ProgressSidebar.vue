@@ -30,8 +30,11 @@
     <div class="subtitle-1">
       <b>Total Credits</b>
     </div>
-    <ProgressBar />
-
+    <ProgressBar
+      :properties="Array('credits')"
+      type="Credits"
+      :requirement="graduationRequirements['totalCredits']"
+    ></ProgressBar>
     <v-divider class="mb-2 mt-3"></v-divider>
 
     <v-row class="mx-0">
@@ -50,14 +53,24 @@
           v-bind:key="requirement.name"
         >
           <div class="subtitle-1">{{ requirement.name }}</div>
-          <ProgressBar />
+          <ProgressBar
+            :properties="requirement.aus"
+            propertyType="accreditationUnits"
+            :requirement="requirement.value"
+            :type="requirement.type"
+          ></ProgressBar>
         </div>
         <div
           v-for="requirement in graduationRequirements['auCombinedRequirements']"
           v-bind:key="requirement.name"
         >
           <div class="subtitle-1">{{ requirement.name }}</div>
-          <ProgressBar />
+          <ProgressBar
+            :properties="requirement.aus"
+            propertyType="accreditationUnits"
+            :requirement="requirement.value"
+            :type="requirement.type"
+          ></ProgressBar>
         </div>
       </div>
     </v-expand-transition>
@@ -80,7 +93,12 @@
           v-bind:key="requirement.name"
         >
           <div class="subtitle-1">{{ requirement.name }}</div>
-          <ProgressBar />
+          <ProgressBar
+            :properties="requirement.labels"
+            propertyType="labels"
+            :type="requirement.type"
+            :requirement="requirement.value"
+          ></ProgressBar>
         </div>
       </div>
     </v-expand-transition>

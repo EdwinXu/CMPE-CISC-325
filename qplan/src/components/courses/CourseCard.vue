@@ -1,4 +1,5 @@
 <template>
+<!--<<<<<<< HEAD-->
     <div>
         <v-dialog width="1000">
             <template v-slot:activator="{ on } ">
@@ -14,7 +15,7 @@
                                 <v-btn
                                         icon
                                         small
-                                        v-on:click="undoRemove(course, 'completed'); toggleStatus(course, 'completed');"
+                                        v-on:click="toggleStatus(course, 'completed');"
                                         v-on:click.stop
                                         v-on="on"
                                 >
@@ -34,7 +35,7 @@
                                 <v-btn
                                         icon
                                         small
-                                        v-on:click="undoRemove(course, 'inProgress'); toggleStatus(course, 'inProgress');"
+                                        v-on:click="toggleStatus(course, 'inProgress');"
                                         v-on:click.stop
                                         v-on="on"
                                 >
@@ -54,7 +55,7 @@
                                 <v-btn
                                         icon
                                         small
-                                        v-on:click="undoRemove(course, 'saved'); toggleStatus(course, 'saved');"
+                                        v-on:click="toggleStatus(course, 'saved');"
                                         v-on:click.stop
                                         v-on="on"
                                 >
@@ -106,7 +107,7 @@
                             <v-btn
                                     icon
                                     small
-                                    v-on:click="undoRemove(course, 'completed'); toggleStatus(course, 'completed');"
+                                    v-on:click="toggleStatus(course, 'completed');"
                                     v-on:click.stop
                                     v-on="on"
                             >
@@ -126,7 +127,7 @@
                             <v-btn
                                     icon
                                     small
-                                    v-on:click="undoRemove(course, 'inProgress'); toggleStatus(course, 'inProgress');"
+                                    v-on:click="toggleStatus(course, 'inProgress');"
                                     v-on:click.stop
                                     v-on="on"
                             >
@@ -146,7 +147,7 @@
                             <v-btn
                                     icon
                                     small
-                                    v-on:click="undoRemove(course, 'saved'); toggleStatus(course, 'saved');"
+                                    v-on:click="toggleStatus(course, 'saved');"
                                     v-on:click.stop
                                     v-on="on"
                             >
@@ -171,18 +172,10 @@
                     CS: {{ course.accreditationUnits.complementaryStudies }}
                     ES: {{ course.accreditationUnits.engineeringSciences }}
                     ED: {{ course.accreditationUnits.engineeringDesign }}
-                    <v-chip-group class="my-n1">
-                        <v-chip small v-for="courseLabel in activeLabels" :key="courseLabel">{{ courseLabel }}</v-chip>
-                    </v-chip-group>
                 </v-card-text>
 
                 <v-card-text>{{ course.description }}</v-card-text>
                 <v-card-text>Professor: {{ course.professor }}</v-card-text>
-                <v-card-text>
-                    Prerequisites: {{ getPrerequisiteText() }}
-                    <br />Corequisites: {{ getCorequisiteText() }}
-                    <br />Exclusions: {{ getExclusionText() }}
-                </v-card-text>
             </v-card>
         </v-dialog>
     </div>
@@ -221,37 +214,6 @@
             },
             addRecent: function(course) {
                 this.$store.commit("addRecentlyViewed", course);
-            },
-            getPrerequisiteText() {
-                if( this.course.prerequisites.text == undefined) {
-                    return ""
-                } else {
-                    return this.course.prerequisites.text
-                }
-            },
-            getCorequisiteText() {
-                if( this.course.corequisites.text == undefined) {
-                    return ""
-                } else {
-                    return this.course.corequisites.text
-                }
-            },
-            getExclusionText() {
-                if( this.course.exclusions.text == undefined) {
-                    return ""
-                } else {
-                    return this.course.exclusions.text
-                }
-            },
-            undoRemove: function(course, status) {
-                if (course.status === status) {
-                    this.$store.commit("updateRemovedCourse", [course.id, course.status]);
-                    if (this.$route.name == "home") {
-                        this.$store.commit("updateRemovedSnackbarHome", true);
-                    } else {
-                        this.$store.commit("updateRemovedSnackbarProgress", true);
-                    }
-                }
             }
         },
         computed: {
