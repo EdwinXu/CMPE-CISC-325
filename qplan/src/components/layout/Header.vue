@@ -34,9 +34,21 @@
 
     <v-spacer />
 
-    <v-btn icon>
-      <v-icon>mdi-calendar</v-icon>
-    </v-btn>
+    <template>
+      <v-dialog>
+        <template v-slot:activator="{ on: dialog }">
+          <v-tooltip bottom nudge-bottom="-2" open-delay="300">
+            <template v-slot:activator="{ on: tooltip }">
+              <v-btn icon v-on="{ ...tooltip, ...dialog }">
+                <v-icon>mdi-calendar</v-icon>
+              </v-btn>
+            </template>
+            <span>Class Schedule</span>
+          </v-tooltip>
+        </template>
+        <CourseCalendar></CourseCalendar>
+      </v-dialog>
+    </template>
 
     <v-divider vertical inset />
 
@@ -61,10 +73,14 @@
 </template>
 
 <script>
+import CourseCalendar from "@/components/courses/CourseCalendar";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Header",
+  components: {
+    CourseCalendar
+  },
   methods: {
     toggleProgressSidebar() {
       this.$store.commit(
