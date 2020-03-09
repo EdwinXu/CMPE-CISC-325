@@ -89,7 +89,7 @@
       </div>
     </v-toolbar>
 
-    <div v-for="course in filteredCourses" :key="course.id" class="my-2 mx-2">
+    <div v-for="course in filteredCourses" :key="course.id" class="my-1 mx-2">
       <CourseCard :course="course" detailed />
     </div>
   </div>

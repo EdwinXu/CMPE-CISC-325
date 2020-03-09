@@ -69,7 +69,7 @@
               <span>Saved</span>
             </v-tooltip>
             <template v-if="detailed" #extension>
-              <v-subheader class="ml-n4">
+              <v-subheader class="ml-n4 mt-n5">
                 {{ course.credits }} Credits |
                 Lec:{{ course.lecture }}h -
                 {{ (course.tutorial) ? " Y " : " N " }}Tut.
