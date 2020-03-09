@@ -89,6 +89,23 @@
           <b class="mr-1">{{ course.courseCode }} - {{ course.name }}</b>
           ({{ course.semester }})
           <v-spacer />
+
+          <template>
+            <v-dialog>
+              <template v-slot:activator="{ on: dialog }">
+                <v-tooltip bottom nudge-bottom="-2" open-delay="300">
+                  <template v-slot:activator="{ on: tooltip }">
+                    <v-btn icon v-on="{ ...tooltip, ...dialog }">
+                      <v-icon>mdi-calendar</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Class Schedule</span>
+                </v-tooltip>
+              </template>
+              <CourseCalendar></CourseCalendar>
+            </v-dialog>
+          </template>
+
           <v-divider vertical inset class="mb-2 mr-1" />
 
           <v-tooltip bottom nudge-bottom="-6" open-delay="500">
@@ -172,6 +189,7 @@
 
 
 <script>
+import CourseCalendar from "@/components/courses/CourseCalendar";
 import { mapState } from "vuex";
 
 export default {
@@ -180,6 +198,9 @@ export default {
     alertColor: "amber accent-4",
     chosenSemester: undefined
   }),
+  components: {
+    CourseCalendar
+  },
   props: {
     course: Object,
     detailed: Boolean
