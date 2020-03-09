@@ -90,16 +90,6 @@
                     <b class="mr-1">{{ course.courseCode }} - {{ course.name }}</b>
                     ({{ course.semester }})
                     <v-spacer />
-
-<!--                    <v-select-->
-<!--                            v-model="selectedSemester"-->
-<!--                            label="Select Semester"-->
-<!--                            dense-->
-<!--                            v-if="Array.isArray(semesterOptions) && semesterOptions.length > 1"-->
-<!--                            :items="semesterOptions"-->
-<!--                            class="mb-n1"-->
-<!--                            style="max-width: 150px;"-->
-<!--                    ></v-select>-->
                     <v-divider vertical inset class="mb-2 mr-1" />
 
                     <v-tooltip bottom nudge-bottom="-6" open-delay="500">
@@ -196,32 +186,15 @@
             detailed: Boolean
         },
         methods: {
-            // toggleStatus: function(course, status) {
-            //     if (
-            //         status === "inProgress" &&
-            //         this.semesterOptions.length > 1 &&
-            //         this.selectedSemester === undefined &&
-            //         this.chosenSemester === undefined
-            //     ) {
-            //         alert(
-            //             "Please choose which semester you want to take this course in first.  Go to the detailed course view."
-            //         );
-            //         return;
-            //         //TODO Make nicer
-            //     }
-            //     this.$store.commit("toggleStatus", [course.id, status]);
-            //     this.$store.commit("addRecentlyViewed", course);
-            // },
+            toggleStatus: function(course, status) {
+                this.$store.commit("toggleStatus", [course.id, status]);
+                this.$store.commit("addRecentlyViewed", course);
+            },
             addRecent: function(course) {
                 this.$store.commit("addRecentlyViewed", course);
             }
         },
         computed: {
-            // semesterOptions() {
-            //     return this.course.semester
-            //         .split("/")
-            //         .map(semester => this.semesterMapping[semester]);
-            // },
             ...mapState(["labelNames", "semesterMapping"])
         }
     };

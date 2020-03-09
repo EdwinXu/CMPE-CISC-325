@@ -1174,12 +1174,34 @@ export default new Vuex.Store({
     updateProgressSidebar(state, value) {
       state.showProgressSidebar = value
     },
-    addRecentlyViewed(state, toAdd) {
-      var existingIndex = state.recentlyViewedCourses.indexOf(toAdd)
-      if (existingIndex != -1) {
-        state.recentlyViewedCourses.splice(existingIndex, 1)
-      }
-      state.recentlyViewedCourses.unshift(toAdd)
+      toggleStatus(state, payload) {
+          const courseID = payload[0]
+          const status = payload[1]
+
+          const course = state.courses.find(course => course.id === courseID)
+          const curStatus = course.status
+          var nextStatus
+          if (curStatus === status) {
+              nextStatus = ''
+          } else {
+              nextStatus = status
+          }
+
+          var semester = course.semester
+          if (course.chosenSemester && course.chosenSemester !== undefined) semester = course.chosenSemester
+
+          if (semester === ''){
+              semester = "F/W"
+          }
+
+          course.status = nextStatus
+      },
+      addRecentlyViewed(state, toAdd) {
+          var existingIndex = state.recentlyViewedCourses.indexOf(toAdd)
+          if (existingIndex != -1) {
+            state.recentlyViewedCourses.splice(existingIndex, 1)
+          }
+          state.recentlyViewedCourses.unshift(toAdd)
     },
   },
   actions: {
